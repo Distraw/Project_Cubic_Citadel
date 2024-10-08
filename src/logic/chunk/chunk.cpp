@@ -6,6 +6,8 @@ Chunk::Chunk()
 	_block = new char**[chunk_size_x];
 
 	memset(_block, 0, chunk_block_count);
+
+	int a = 3;
 }
 
 Chunk::~Chunk()
