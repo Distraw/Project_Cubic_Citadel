@@ -25,7 +25,7 @@ int main()
 		return -1;
 	}
 
-	window.setBackgroundColor(0, 0, 1);
+	window.setBackgroundColor(0, 1, 1);
 	while (window.isOpened())
 	{
 		window.refresh();
@@ -33,24 +33,3 @@ int main()
 
 	return 0;
 }
-
-//#include <glad/glad.h>
-//#include <GLFW/glfw3.h>
-//
-//int main()
-//{
-//	glfwInit();
-//	GLFWwindow* window = glfwCreateWindow(600, 600, "asd", 0, 0);
-//	glfwMakeContextCurrent(window);
-//	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-//
-//	glClearColor(1, 1, 1, 1);
-//	while (!glfwWindowShouldClose(window))
-//	{
-//		glfwPollEvents();
-//		glClear(GL_COLOR_BUFFER_BIT);
-//		glfwSwapBuffers(window);
-//	}
-//
-//	return 0;
-//}

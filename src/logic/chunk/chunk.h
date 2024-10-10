@@ -8,11 +8,10 @@ constexpr int chunk_block_count = chunk_size_x * chunk_size_y * chunk_size_z;
 class Chunk
 {
 private:
-	char*** _block;
+	char* _block;
 public:
 	Chunk();
 	~Chunk();
 
-	void setBlock(int x, int y, int z, BlockId block_id);
-	void setTree(int x, int z);
+	void setBlock(int x, int y, int z, BlockIndex index);
 };

@@ -3,11 +3,9 @@
 
 Chunk::Chunk()
 {
-	_block = new char**[chunk_size_x];
-
+	_block = new char[chunk_block_count];
 	memset(_block, 0, chunk_block_count);
 
-	int a = 3;
 }
 
 Chunk::~Chunk()
@@ -15,7 +13,7 @@ Chunk::~Chunk()
 	delete[] _block;
 }
 
-void Chunk::setBlock(int x, int y, int z, BlockId block_id)
+void Chunk::setBlock(int x, int y, int z, BlockIndex index)
 {
-
+	_block[x + chunk_size_x * z + chunk_size_x * chunk_size_z * y] = index;
 }

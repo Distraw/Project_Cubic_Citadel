@@ -1,7 +1,7 @@
 #pragma once
-enum BlockId
+
+enum BlockIndex
 {
-	AIR = 0,
-	GRASS = 1,
-	SAND = 2
+	air = 0,
+	grass = 1
 };
