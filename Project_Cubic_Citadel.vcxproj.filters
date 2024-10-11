@@ -6,14 +6,12 @@
     <ClCompile Include="src\graphics\window\window.cpp" />
     <ClCompile Include="src\graphics\shader\shader.cpp" />
     <ClCompile Include="src\graphics\shader\program.cpp" />
-    <ClCompile Include="src\logic\chunk\chunk.cpp" />
     <ClCompile Include="src\logic\player\camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\window\window.h" />
     <ClInclude Include="src\graphics\shader\program.h" />
     <ClInclude Include="src\graphics\shader\shader.h" />
-    <ClInclude Include="src\logic\chunk\chunk.h" />
     <ClInclude Include="src\block_definition.h" />
     <ClInclude Include="src\logic\player\camera.h" />
   </ItemGroup>

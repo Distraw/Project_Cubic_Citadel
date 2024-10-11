@@ -11,6 +11,11 @@ ShaderProgram::~ShaderProgram()
 	if (!_program) glDeleteProgram(_program);
 }
 
+void ShaderProgram::setViewMatrix(mat4 view_matrix)
+{
+	glUniformMatrix4fv(glGetUniformLocation(_program, "view"), 1, GL_FALSE, &view_matrix[0][0]);
+}
+
 void ShaderProgram::loadShaders(string vertex_shader_filename, string fragment_shader_filename)
 {
 	Shader vertex_shader(GL_VERTEX_SHADER);

@@ -133,9 +133,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\logic\chunk\chunk.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)/include; $(ProjectDir)/Project_Cubic_Citadel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
     <ClCompile Include="src\logic\player\camera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader\program.cpp" />
@@ -147,7 +144,6 @@
     <ClInclude Include="src\graphics\shader\program.h" />
     <ClInclude Include="src\graphics\shader\shader.h" />
     <ClInclude Include="src\graphics\window\window.h" />
-    <ClInclude Include="src\logic\chunk\chunk.h" />
     <ClInclude Include="src\logic\player\camera.h" />
   </ItemGroup>
   <ItemGroup>
