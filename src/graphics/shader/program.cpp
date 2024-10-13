@@ -11,9 +11,19 @@ ShaderProgram::~ShaderProgram()
 	if (!_program) glDeleteProgram(_program);
 }
 
-void ShaderProgram::setViewMatrix(mat4 view_matrix)
+void ShaderProgram::setModelMatrix(mat4 model)
 {
-	glUniformMatrix4fv(glGetUniformLocation(_program, "view"), 1, GL_FALSE, &view_matrix[0][0]);
+	glUniformMatrix4fv(_model_location, 1, GL_FALSE, &model[0][0]);
+}
+
+void ShaderProgram::setViewMatrix(mat4 view)
+{
+	glUniformMatrix4fv(_view_location, 1, GL_FALSE, &view[0][0]);
+}
+
+void ShaderProgram::setProjectionMatrix(mat4 projection)
+{
+	glUniformMatrix4fv(_projection_location, 1, GL_FALSE, &projection[0][0]);
 }
 
 void ShaderProgram::loadShaders(string vertex_shader_filename, string fragment_shader_filename)
@@ -39,6 +49,10 @@ void ShaderProgram::loadShaders(string vertex_shader_filename, string fragment_s
 		glGetProgramInfoLog(_program, 1024, NULL, infolog);
 		throw runtime_error(string(infolog));
 	}
+
+	_model_location			= glGetUniformLocation(_program, "model");
+	_view_location			= glGetUniformLocation(_program, "view");
+	_projection_location	= glGetUniformLocation(_program, "projection");
 }
 
 void ShaderProgram::use()

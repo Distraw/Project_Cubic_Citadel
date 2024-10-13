@@ -2,7 +2,8 @@
 #include <stdexcept>
 
 Window::Window(int width, int height, std::string title, GLFWmonitor* screen)
-	: _width(width), _height(height), _title(title), _screen(screen), _window(nullptr)
+	: _width(width), _height(height), _title(title), _screen(screen), _window(nullptr),
+	_prev_frame_time(0), _curr_frame_time(0), _delta_time(0)
 {
 	
 }
@@ -33,6 +34,10 @@ void Window::refresh()
 	glfwPollEvents();
 	glfwSwapBuffers(_window);
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	_prev_frame_time = _curr_frame_time;
+	_curr_frame_time = glfwGetTime();
+	_delta_time = _curr_frame_time - _prev_frame_time;
 }
 
 void Window::setBackgroundColor(float red, float green, float blue)
@@ -40,9 +45,29 @@ void Window::setBackgroundColor(float red, float green, float blue)
 	glClearColor(red, green, blue, 0);
 }
 
+void Window::hideCursor()
+{
+	glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void Window::showCursor()
+{
+	glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
 bool Window::isOpened()
 {
 	return !glfwWindowShouldClose(_window);
+}
+
+bool Window::isKeyPressed(int key_id)
+{
+	return glfwGetKey(_window, key_id) == GLFW_PRESS;
+}
+
+void Window::getCursorPos(double& xpos, double& ypos)
+{
+	glfwGetCursorPos(_window, &xpos, &ypos);
 }
 
 int Window::getWidth()
@@ -53,6 +78,16 @@ int Window::getWidth()
 int Window::getHeight()
 {
 	return _height;
+}
+
+double Window::getDeltaTime()
+{
+	return _delta_time;
+}
+
+const double* Window::getDeltaTimePtr()
+{
+	return &_delta_time;
 }
 
 GLFWwindow* Window::getWindowPtr()

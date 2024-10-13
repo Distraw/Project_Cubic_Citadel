@@ -10,7 +10,6 @@ constexpr int chunk_size_y = 64;
 class Chunk 
 {
 private:
-	//block[0][2][1]==BlockIndex.grass 
 	char*** _block;
 public:
 	Chunk();

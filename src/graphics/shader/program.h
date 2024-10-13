@@ -8,11 +8,16 @@ class ShaderProgram
 private:
 	GLuint _program;
 
+	GLint _model_location;
+	GLint _view_location;
+	GLint _projection_location;
 public:
 	ShaderProgram();
 	~ShaderProgram();
 
-	void setViewMatrix(mat4 view_matrix);
+	void setModelMatrix(mat4 model);
+	void setViewMatrix(mat4 view);
+	void setProjectionMatrix(mat4 projection);
 
 	void loadShaders(string vertex_shader_filename, string fragment_shader_filename);
 	void use();
