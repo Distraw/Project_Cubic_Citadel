@@ -27,13 +27,15 @@ void Window::init()
 	glfwMakeContextCurrent(_window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) throw std::runtime_error("GLAD was not initialized");
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Window::refresh()
 {
 	glfwPollEvents();
 	glfwSwapBuffers(_window);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	_prev_frame_time = _curr_frame_time;
 	_curr_frame_time = glfwGetTime();
@@ -63,6 +65,11 @@ bool Window::isOpened()
 bool Window::isKeyPressed(int key_id)
 {
 	return glfwGetKey(_window, key_id) == GLFW_PRESS;
+}
+
+bool Window::isMouseButtonPressed(int key_id)
+{
+	return glfwGetMouseButton(_window, key_id) == GLFW_PRESS;
 }
 
 void Window::getCursorPos(double& xpos, double& ypos)

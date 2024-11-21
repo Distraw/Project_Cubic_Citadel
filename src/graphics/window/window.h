@@ -33,6 +33,7 @@ public:
 
 	bool isOpened();
 	bool isKeyPressed(int key_id);
+	bool isMouseButtonPressed(int key_id);
 
 	void getCursorPos(double& xpos, double &ypos);
 

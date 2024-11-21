@@ -34,12 +34,13 @@ public:
 	void setRotation(float yaw, float pitch);
 	void setDeltaTimePtr(const double* delta_time);
 
+	vec3 getFrontVector();
+	vec3 getPosition();
 	mat4 getViewMatrix();
 	mat4 getProjectionMatrix();
 
 	void move(float x, float y, float z);
 	void move(vec3 direction);
 	void definedMove(int x, int y, int z);
-	void definedMove(vec3 direction);
 	void rotate(float yaw, float pitch);
 };

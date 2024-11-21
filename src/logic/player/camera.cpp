@@ -1,8 +1,8 @@
 #include "camera.h"
 
 Camera::Camera()
-	: _position(0.f, 0.f, 0.f), _yaw(90.f), _pitch(0.f), _worldUp(0.f, 1.f, 0.f),
-	_fov(90.f), _speed(1.f)
+	: _position(64.f, 12.f, 64.f), _yaw(90.f), _pitch(0.f), _worldUp(0.f, 1.f, 0.f),
+	_fov(90.f), _speed(15.f)
 {
 	
 }
@@ -17,8 +17,8 @@ void Camera::update()
 	if (_yaw >= 360)	_yaw = _yaw - 360;
 	else if (_yaw < 0)	_yaw = _yaw + 360;
 
-	if (_pitch >= 90)		_pitch = 90;
-	else if (_pitch <= -90)	_pitch = -90;
+	if (_pitch >= 89)		_pitch = 89;
+	else if (_pitch <= -89)	_pitch = -89;
 		
 
 	vec3 front;
@@ -53,6 +53,16 @@ void Camera::setDeltaTimePtr(const double* delta_time)
 	_delta_time = delta_time;
 }
 
+vec3 Camera::getFrontVector()
+{
+	return _front;
+}
+
+vec3 Camera::getPosition()
+{
+	return _position;
+}
+
 mat4 Camera::getViewMatrix()
 {
 	return lookAt(_position, _position + _front, _up);
@@ -60,7 +70,7 @@ mat4 Camera::getViewMatrix()
 
 mat4 Camera::getProjectionMatrix()
 {
-	return perspective(radians(90.f), 1.f, 0.1f, 100.f);
+	return perspective(radians(90.f), 1.f, 0.1f, 1000.f);
 }
 
 void Camera::move(float x, float y, float z)
@@ -111,11 +121,6 @@ void Camera::definedMove(int x, int y, int z)
 	
 
 	this->move(dir);
-}
-
-void Camera::definedMove(vec3 direction)
-{
-
 }
 
 void Camera::rotate(float yaw, float pitch)

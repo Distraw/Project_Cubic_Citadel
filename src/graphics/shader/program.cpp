@@ -26,6 +26,11 @@ void ShaderProgram::setProjectionMatrix(mat4 projection)
 	glUniformMatrix4fv(_projection_location, 1, GL_FALSE, &projection[0][0]);
 }
 
+void ShaderProgram::setTexture(GLuint texture_id)
+{
+	glUniform1i(_texture_location, texture_id);
+}
+
 void ShaderProgram::loadShaders(string vertex_shader_filename, string fragment_shader_filename)
 {
 	Shader vertex_shader(GL_VERTEX_SHADER);
@@ -53,6 +58,7 @@ void ShaderProgram::loadShaders(string vertex_shader_filename, string fragment_s
 	_model_location			= glGetUniformLocation(_program, "model");
 	_view_location			= glGetUniformLocation(_program, "view");
 	_projection_location	= glGetUniformLocation(_program, "projection");
+	_texture_location		= glGetUniformLocation(_program, "texture_atlas");
 }
 
 void ShaderProgram::use()

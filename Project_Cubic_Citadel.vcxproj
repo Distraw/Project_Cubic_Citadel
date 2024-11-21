@@ -133,20 +133,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\graphics\render\chunk_render.cpp" />
+    <ClCompile Include="src\json_parser\json_parser.cpp" />
     <ClCompile Include="src\logic\chunk\chunk.cpp" />
     <ClCompile Include="src\logic\player\camera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader\program.cpp" />
     <ClCompile Include="src\graphics\shader\shader.cpp" />
     <ClCompile Include="src\graphics\window\window.cpp" />
+    <ClCompile Include="src\world\world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\block_definition.h" />
+    <ClInclude Include="src\graphics\render\chunk_render.h" />
     <ClInclude Include="src\graphics\shader\program.h" />
     <ClInclude Include="src\graphics\shader\shader.h" />
     <ClInclude Include="src\graphics\window\window.h" />
+    <ClInclude Include="src\json_parser\json_parser.h" />
     <ClInclude Include="src\logic\chunk\chunk.h" />
     <ClInclude Include="src\logic\player\camera.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\world\world.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shader_source\default_fragment_shader.glsl" />
