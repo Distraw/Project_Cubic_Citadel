@@ -1,5 +1,9 @@
 #include "window.h"
 #include <stdexcept>
+#include <chrono>
+#include <thread>
+
+constexpr double target_frame_time = 1.0f / 120.0f;
 
 Window::Window(int width, int height, std::string title, GLFWmonitor* screen)
 	: _width(width), _height(height), _title(title), _screen(screen), _window(nullptr),
@@ -21,6 +25,7 @@ void Window::init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 		
 	_window = glfwCreateWindow(_width, _height, _title.c_str(), _screen, NULL);
 	if (!_window) throw std::runtime_error("Window failed to open");
@@ -33,13 +38,21 @@ void Window::init()
 
 void Window::refresh()
 {
-	glfwPollEvents();
-	glfwSwapBuffers(_window);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	_prev_frame_time = _curr_frame_time;
 	_curr_frame_time = glfwGetTime();
 	_delta_time = _curr_frame_time - _prev_frame_time;
+
+	double sleep_time = target_frame_time - _delta_time;
+	std::this_thread::sleep_for(std::chrono::duration<double>(sleep_time));
+
+	glfwPollEvents();
+	glfwSwapBuffers(_window);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Window::close()
+{
+	glfwSetWindowShouldClose(_window, true);
 }
 
 void Window::setBackgroundColor(float red, float green, float blue)

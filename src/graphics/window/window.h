@@ -25,6 +25,7 @@ public:
 
 	void init();
 	void refresh();
+	void close();
 
 	void setBackgroundColor(float red, float green, float blue);
 

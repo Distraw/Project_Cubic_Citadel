@@ -158,7 +158,7 @@ void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 					face_texcoord_buffer[10] = 0.625f;
 					face_texcoord_buffer[11] = 0.f;
 					face_texcoord_buffer[18] = 0.625f;
-					face_texcoord_buffer[18] = 0.f;
+					face_texcoord_buffer[19] = 0.f;
 
 					face_texcoord_buffer[4] = 0.625f;
 					face_texcoord_buffer[5] = 0.125f;
@@ -187,7 +187,7 @@ void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 					face_texcoord_buffer[10] = 0.75f;
 					face_texcoord_buffer[11] = 0.f;
 					face_texcoord_buffer[18] = 0.75f;
-					face_texcoord_buffer[18] = 0.f;
+					face_texcoord_buffer[19] = 0.f;
 
 					face_texcoord_buffer[4] = 0.75f;
 					face_texcoord_buffer[5] = 0.125f;
@@ -216,7 +216,7 @@ void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 					face_texcoord_buffer[10] = 0.875f;
 					face_texcoord_buffer[11] = 0.f;
 					face_texcoord_buffer[18] = 0.875f;
-					face_texcoord_buffer[18] = 0.f;
+					face_texcoord_buffer[19] = 0.f;
 
 					face_texcoord_buffer[4] = 0.875f;
 					face_texcoord_buffer[5] = 0.125f;
@@ -245,7 +245,7 @@ void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 					face_texcoord_buffer[10] = 0.875f;
 					face_texcoord_buffer[11] = 0.125f;
 					face_texcoord_buffer[18] = 0.875f;
-					face_texcoord_buffer[18] = 0.125f;
+					face_texcoord_buffer[19] = 0.125f;
 
 					face_texcoord_buffer[4] = 1.0f;
 					face_texcoord_buffer[5] = 0.125f;
@@ -313,7 +313,7 @@ void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 					face_texcoord_buffer[10] = 0.375;
 					face_texcoord_buffer[11] = 0.125f;
 					face_texcoord_buffer[18] = 0.375;
-					face_texcoord_buffer[18] = 0.125f;
+					face_texcoord_buffer[19] = 0.125f;
 
 					face_texcoord_buffer[4] = 0.375f;
 					face_texcoord_buffer[5] = 0.25f;

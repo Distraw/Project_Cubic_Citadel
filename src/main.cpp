@@ -8,14 +8,13 @@
 	 2) GLFW					: glfw3.lib, glfw3.h
 	 3) STB image loader		: stb_image.h
 	 4) GLAD (OpenGL loader)	: glad.c
-	 5) Nlohmann (JSON parser)	: json.hpp
 
 	 Created on Visual Studio 2022
 	 
 	 Windows only, but code is "mostly" written
 	 to work on different platforms
 
-	 Code by Dima and Nikita
+	 Code by Dima
 	 2024
 */ 
 
@@ -41,7 +40,7 @@ bool is_lmb_pressed = false;
 bool is_rmb_pressed = false;
 BlockIndex active_block = BlockIndex::dirt;
 
-Window window(1000, 1000, "Window", NULL);
+Window window(900, 900, "KC13 Minecraft clone", NULL);
 ShaderProgram program;
 Camera camera;
 World world;

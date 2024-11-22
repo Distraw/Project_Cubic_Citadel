@@ -3,6 +3,19 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include <ctime>
+
+World::World()
+{
+
+}
+
+World::~World()
+{
+	delete[] _chunk;
+	delete[] _renderer;
+}
+
 void World::generate()
 {
 	_chunk = new Chunk[64];
@@ -15,19 +28,35 @@ void World::generate()
 			for (int j = 0; j < 16; j++)
 				for (int g = 0; g < 16; g++)
 				{
-					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 0);
+					_chunk[i * 8 + k].setBlock(BlockIndex::bedrock, j, g, 0);
 					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 1);
 					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 2);
 					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 3);
-					_chunk[i * 8 + k].setBlock(BlockIndex::dirt, j, g, 4);
-					_chunk[i * 8 + k].setBlock(BlockIndex::dirt, j, g, 5);
-					_chunk[i * 8 + k].setBlock(BlockIndex::grass, j, g, 6);
+					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 4);
+					_chunk[i * 8 + k].setBlock(BlockIndex::stone, j, g, 5);
+					_chunk[i * 8 + k].setBlock(BlockIndex::dirt, j, g, 6);
+					_chunk[i * 8 + k].setBlock(BlockIndex::dirt, j, g, 7);
+					_chunk[i * 8 + k].setBlock(BlockIndex::grass, j, g, 8);
 				}
 
 			_renderer[i * 8 + k].init();
-			_renderer[i * 8 + k].prepareChunk(_chunk[i * 8 + k].getChunkData(), i * 16, k * 16);
 		}
 	}
+	
+
+	int tree_count = 32;
+	srand(time(NULL));
+	for (int i = 0; i < tree_count; i++)
+		setTree(rand() % 120 + 4, rand() % 120 + 4, 9);
+
+	refreshBuffers();
+}
+
+void World::refreshBuffers()
+{
+	for (int i = 0; i < 8; i++)
+		for (int j = 0; j < 8; j++)
+			_renderer[i * 8 + j].prepareChunk(_chunk[i * 8 + j].getChunkData(), i * 16, j * 16);
 }
 
 void World::render()
@@ -73,7 +102,7 @@ void World::raycastBlock(BlockIndex block_type, vec3 position, vec3 direction)
 	}
 }
 
-void World::setBlock(BlockIndex block, int x, int z, int y)
+void World::setBlock(BlockIndex block, int x, int z, int y, bool refresh_chunk)
 {
 	if (x < 0 || y < 0 || z < 0 || x > 128 || y > 64 || z > 128) return;
 
@@ -81,7 +110,50 @@ void World::setBlock(BlockIndex block, int x, int z, int y)
 	int z_index = z / 16;
 
 	_chunk[x_index * 8 + z_index].setBlock(block, x % 16, z % 16, y);
+
+	if (!refresh_chunk)
+		return;
+
 	_renderer[x_index * 8 + z_index].prepareChunk(_chunk[x_index * 8 + z_index].getChunkData(), x_index * 16, z_index * 16);
+}
+
+void World::setTree(int x, int z, int y)
+{
+	setBlock(BlockIndex::wood, x, z, y, false);
+	setBlock(BlockIndex::wood, x, z, y + 1, false);
+	setBlock(BlockIndex::wood, x, z, y + 2, false);
+	setBlock(BlockIndex::wood, x, z, y + 3, false);
+
+	setBlock(BlockIndex::leaves, x + 1, z, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 2, z, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 1, z, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 2, z, y + 2, false);
+	setBlock(BlockIndex::leaves, x, z + 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x, z + 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x, z - 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x, z - 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 1, z + 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 1, z + 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 1, z - 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 1, z - 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 1, z + 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 1, z + 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 1, z - 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 1, z - 2, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 2, z - 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x - 2, z + 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 2, z - 1, y + 2, false);
+	setBlock(BlockIndex::leaves, x + 2, z + 1, y + 2, false);
+
+	setBlock(BlockIndex::leaves, x + 1, z, y + 3, false);
+	setBlock(BlockIndex::leaves, x + 1, z + 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x + 1, z - 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x - 1, z, y + 3, false);
+	setBlock(BlockIndex::leaves, x - 1, z + 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x - 1, z - 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x, z - 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x, z + 1, y + 3, false);
+	setBlock(BlockIndex::leaves, x, z, y + 4, false);
 }
 
 BlockIndex World::getBlock(int x, int y, int z)

@@ -2,7 +2,7 @@
 
 Camera::Camera()
 	: _position(64.f, 12.f, 64.f), _yaw(90.f), _pitch(0.f), _worldUp(0.f, 1.f, 0.f),
-	_fov(90.f), _speed(15.f)
+	_fov(90.f), _speed(7.f)
 {
 	
 }
