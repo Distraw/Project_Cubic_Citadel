@@ -1,6 +1,5 @@
 /*
-	Minecraft clone made by Karazin University KS13 group
-	to get 100 diamonds in a competition :)
+	Minecraft clone
 
 	 Language: C++, GLSL (for shaders)
 	 Used external libraries/headers:
@@ -40,7 +39,7 @@ bool is_lmb_pressed = false;
 bool is_rmb_pressed = false;
 BlockIndex active_block = BlockIndex::dirt;
 
-Window window(900, 900, "KC13 Minecraft clone", NULL);
+Window window(900, 900, "Minecraft clone", NULL);
 ShaderProgram program;
 Camera camera;
 World world;
@@ -161,6 +160,10 @@ void processInput()
 		active_block = BlockIndex::leaves;
 	}
 
+	if (window.isKeyPressed(GLFW_KEY_ESCAPE))
+	{
+		window.close();
+	}
 	if (window.isKeyPressed(GLFW_KEY_W))
 	{
 		camera.definedMove(0, 0, 1);

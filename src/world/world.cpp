@@ -83,7 +83,7 @@ void World::raycastBlock(BlockIndex block_type, vec3 position, vec3 direction)
 		block_pos = floor(current_position);
 
 		if (block_pos.x < 0 || block_pos.y < 0 || block_pos.z < 0 ||
-			block_pos.x > 128 || block_pos.y > 64 || block_pos.z > 128)
+			block_pos.x >= 128 || block_pos.y >= 64 || block_pos.z >= 128)
 			return;
 
 		if (_chunk[block_pos.x / 16 * 8 + block_pos.z / 16].getBlock(block_pos.x % 16, block_pos.y, block_pos.z % 16)

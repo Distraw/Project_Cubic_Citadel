@@ -11,34 +11,6 @@ Chunk::~Chunk()
 	delete[] _block;                 
 }
 
-void Chunk::raycastBlock(BlockIndex block_type, vec3 position, vec3 direction)
-{
-	vec3 current_position;
-	ivec3 prev_block_pos;
-	ivec3 block_pos = floor(position);
-	for (float t = 0.f; t < MAX_RAY_DISTANCE; t += STEP_LENGTH)
-	{
-		current_position = position + t * direction;
-
-		prev_block_pos = block_pos;
-		block_pos = floor(current_position);
-
-		if (_block[block_pos.x + block_pos.z * chunk_size_x + block_pos.y * chunk_size_x * chunk_size_z] 
-			!= BlockIndex::air)
-		{
-			if (block_type != BlockIndex::air)
-			{
-				ivec3 offset_pos = block_pos - prev_block_pos;
-				block_pos -= offset_pos;
-			}
-			
-			setBlock(block_type, block_pos.x, block_pos.z, block_pos.y);
-
-			return;
-		}
-	}
-}
-
 void Chunk::setBlock(BlockIndex block_type, int x, int z, int y)
 {
 	if (x >= chunk_size_x || z >= chunk_size_z || y >= chunk_size_y

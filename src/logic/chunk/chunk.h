@@ -21,7 +21,6 @@ public:
 	Chunk();
 	~Chunk();
 
-	void raycastBlock(BlockIndex block_type, vec3 position, vec3 direction);
 	void setBlock(BlockIndex block_type, int x, int z, int y);
 
 	BlockIndex getBlock(int x, int y, int z);

@@ -21,7 +21,7 @@ void ChunkRenderer::init()
 	glGenBuffers(1, &_texcoord_buffer);
 }
 
-// This method is bullshit, but I don`t know how to make it better :)
+// TODO: rework this method
 void ChunkRenderer::prepareChunk(char* chunk, float xpos, float zpos)
 {
 	float* vertex_buffer = new float[3 * 3 * 2 * 6 * 16 * 16 * 64];
